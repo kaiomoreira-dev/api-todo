@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  postgresql:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=kaiodev
+      - POSTGRESQL_PASSWORD=c53818503084abae876e82b1aaf50aa5
+      - POSTGRESQL_DATABASE=todo
+
