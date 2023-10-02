@@ -46,7 +46,9 @@ export class RegisterUseCase{
         })
 
         // pegar template de verificaçao de email
-        const pathTemplate = './src/views/emails/verify-email.hbs'
+        let pathTemplate = env.NODE_ENV === "development" ? 
+        './views/emails/verify-email.hbs':
+        './build/views/emails/verify-email.hbs' 
         
         // gerar token valido por 3h
         const token = randomUUID()
@@ -61,7 +63,8 @@ export class RegisterUseCase{
             token
         })
         // formatar link com token
-        const link = env.NODE_ENV === 'production' ? `${env.APP_URL_PRODUCTION}/users/verify-email?email=${email}&token=${token}`:
+        const link = env.NODE_ENV === 'production' ? 
+        `${env.APP_URL_PRODUCTION}/users/verify-email?email=${email}&token=${token}`:
         `${env.APP_URL_DEVLOPMENT}/users/verify-email?email=${email}&token=${token}`
 
         // enviar verificação de email
