@@ -3,7 +3,7 @@ import request from 'supertest'
 import { fastifyApp } from "@/app";
 import { Token } from "@prisma/client";
 import { createAndAuthenticateUser } from "@/utils/test/create-and-authenticate-user";
-import { prisma } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 
 describe('Reset passowrd (e2e)', ()=>{
     beforeAll(async()=>{

@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 import { IResponseLoginAccount } from "@/usecases/users/login/login-usecase";
 import { hash } from "bcrypt";
 import { randomUUID } from "crypto";

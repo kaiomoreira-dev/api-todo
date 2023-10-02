@@ -1,6 +1,6 @@
 import { Prisma, User } from "@prisma/client";
 import { IUsersRepository } from "../interface-users-repository";
-import { prisma } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 
 export class PrismaUsersRepository implements IUsersRepository{
     async getUserSecurity(id: string){

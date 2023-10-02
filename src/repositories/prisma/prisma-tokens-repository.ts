@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { ITokensRepository } from "../interface-tokens-repository";
-import { prisma } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 
 export class PrismaTokensRepository implements ITokensRepository{
     async create(data: Prisma.TokenUncheckedCreateInput){

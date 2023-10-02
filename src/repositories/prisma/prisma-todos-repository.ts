@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { ITodosRepository } from "../interface-todos-repository";
-import { prisma } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 
 export class PrismaTodosRepository implements ITodosRepository{
     async create(data: Prisma.TodoUncheckedCreateInput){
