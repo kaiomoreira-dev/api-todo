@@ -1,5 +1,4 @@
 import fastify, { FastifyError, FastifyReply, FastifyRequest } from "fastify";
-import fastifyCookie from '@fastify/cookie'
 import fastifyCors from '@fastify/cors'
 import "dotenv/config"
 import { usersRoutes } from "./http/controllers/users/routes";
@@ -12,6 +11,7 @@ export const fastifyApp = fastify()
 fastifyApp.register(fastifyCors, {
     origin: true,
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   })
 
 fastifyApp.register(usersRoutes,{
