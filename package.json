@@ -28,6 +28,7 @@
     "@fastify/cookie": "9.0.4",
     "@fastify/cors": "8.3.0",
     "@fastify/jwt": "7.2.0",
+    "@prisma/client": "5.3.1",
     "@rocketseat/eslint-config": "2.1.0",
     "@types/bcrypt": "5.0.0",
     "@types/jsonwebtoken": "9.0.2",
@@ -38,7 +39,6 @@
     "@vitest/ui": "0.33.0",
     "eslint": "8.47.0",
     "npm-run-all": "4.1.5",
-    "prisma": "5.3.1",
     "supertest": "6.3.3",
     "tsup": "7.2.0",
     "tsx": "3.12.7",
@@ -46,7 +46,6 @@
     "vitest-tsconfig-paths": "3.4.1"
   },
   "dependencies": {
-    "@prisma/client": "5.3.1",
     "@sendgrid/mail": "7.7.0",
     "bcrypt": "5.1.1",
     "dayjs": "1.11.9",
@@ -55,6 +54,7 @@
     "handlebars": "4.7.8",
     "jsonwebtoken": "9.0.1",
     "nodemailer": "6.6.3",
+    "prisma": "5.3.1",
     "vitest": "0.33.0",
     "zod": "3.22.2"
   },
