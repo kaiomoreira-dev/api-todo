@@ -48,6 +48,7 @@ export class LogoutUseCase{
 
        if(!verifyExpireDate){
            await this.storageInMemoryProvider.clearBlackList()
+           await this.storageInMemoryProvider.resetDatesToDeleteBlackList()
        }
     }
 }
