@@ -13,6 +13,7 @@ const envSchema = z.object({
     SENDGRID_API_KEY: z.string().nonempty(),
     APP_URL_DEVLOPMENT: z.string().optional(),
     APP_URL_PRODUCTION: z.string().optional(),
+    REDIS_URL: z.string().nonempty(),
 })
 
 const _env = envSchema.safeParse(process.env)

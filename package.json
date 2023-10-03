@@ -32,6 +32,7 @@
     "@types/jsonwebtoken": "9.0.2",
     "@types/node": "20.5.2",
     "@types/nodemailer": "6.4.9",
+    "@types/redis": "4.0.11",
     "@types/supertest": "2.0.12",
     "@vitest/coverage-v8": "0.33.0",
     "@vitest/ui": "0.33.0",
@@ -43,10 +44,9 @@
     "vitest-tsconfig-paths": "3.4.1"
   },
   "dependencies": {
+    "@fastify/cors": "8.3.0",
     "@prisma/client": "5.3.1",
     "@sendgrid/mail": "7.7.0",
-    "@fastify/cors": "8.3.0",
-    "supertest": "6.3.3",
     "bcrypt": "5.1.1",
     "dayjs": "1.11.9",
     "dotenv": "16.3.1",
@@ -54,6 +54,8 @@
     "handlebars": "4.7.8",
     "jsonwebtoken": "9.0.1",
     "nodemailer": "6.6.3",
+    "redis": "4.6.10",
+    "supertest": "6.3.3",
     "tsup": "7.2.0",
     "vitest": "0.33.0",
     "zod": "3.22.2"

@@ -17,7 +17,8 @@ export async function LogoutUser (request: FastifyRequest, reply:FastifyReply){
 
         await logoutUserUseCase.execute({
             refreshToken,
-            idUser: request.user.id
+            idUser: request.user.id,
+            token: request.user.token
         })
         return reply.status(200).send({message: 'Logout performed successfully!'})
 

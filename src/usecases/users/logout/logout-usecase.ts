@@ -3,8 +3,11 @@ import { ITokensRepository } from "@/repositories/interface-tokens-repository";
 import { sign, verify } from "jsonwebtoken";
 import { env } from "@/env";
 import { ResourceNotFoundError } from "@/usecases/errors/resource-not-found-error";
+import { IStorageInMemoryProvider } from '@/providers/StorageInMemoryProvider/interface-storage-in-memory';
+import { IDateProvider } from '@/providers/DateProvider/interface-date-provider';
 
 interface IRequestLogout {
+    token: string
     refreshToken: string
     idUser: string
 }
@@ -12,9 +15,12 @@ interface IRequestLogout {
 export class LogoutUseCase{
     constructor(
         private usersTokensRepository: ITokensRepository,
+        private storageInMemoryProvider: IStorageInMemoryProvider,
+        private dayjsDateProvider: IDateProvider
     ) {}
 
     async execute({
+        token,
         refreshToken,
         idUser
     }:IRequestLogout):Promise<void>{
@@ -26,14 +32,22 @@ export class LogoutUseCase{
 
         // deletar refresh token do banco de dados
         await this.usersTokensRepository.delete(userToken.id)
+        //[x] adicionar token na blacklist
+        await this.storageInMemoryProvider.addToBlackList(token)
 
-        // criar novo access token para substiuir o antigo
-        // e nao retornar nada para que o usuario perca o acesso
-        // total da aplicação
-        const blockingToken = sign({}, env.JWT_SECRET_ACCESS_TOKEN, {
-            subject: userToken.idUser,
-            expiresIn: env.JWT_EXPIRES_IN_ACCESS_TOKEN
-        })
-    
+        //[x] verificar se existe data de expiração no redi
+        const dataExpirateClearBlackList = await this.storageInMemoryProvider.getDatesToDeleteBlackList()
+        if(dataExpirateClearBlackList.length === 0){
+            const newDateExpire = JSON.stringify(this.dayjsDateProvider.addDays(30))
+           await this.storageInMemoryProvider.addNewDateToDeleteBlackList(newDateExpire)
+        }
+        const [newDateExpire] = await this.storageInMemoryProvider.getDatesToDeleteBlackList()
+        const dataExpirate = new Date(JSON.parse(newDateExpire))
+        const dateNow = this.dayjsDateProvider.dateNow()
+        const verifyExpireDate = this.dayjsDateProvider.compareIfBefore(dateNow, dataExpirate)
+
+       if(!verifyExpireDate){
+           await this.storageInMemoryProvider.clearBlackList()
+       }
     }
 }

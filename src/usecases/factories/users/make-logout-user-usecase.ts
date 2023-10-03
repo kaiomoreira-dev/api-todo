@@ -1,9 +1,13 @@
+import { DayjsDateProvider } from "@/providers/DateProvider/implementations/provider-dayjs";
+import { RedisInMemoryProvider } from "@/providers/StorageInMemoryProvider/implementations/provider-redis-in-memory";
 import { PrismaTokensRepository } from "@/repositories/prisma/prisma-tokens-repository";
 import { LogoutUseCase } from "@/usecases/users/logout/logout-usecase";
 
 export async function makeLogoutUser(): Promise<LogoutUseCase> {
     const usersTokensRepository = new PrismaTokensRepository();
-    const logoutUseCase = new LogoutUseCase(usersTokensRepository)
+    const redisStorageProvider = new RedisInMemoryProvider()
+    const dayjsDateProvider = new DayjsDateProvider();
+    const logoutUseCase = new LogoutUseCase(usersTokensRepository,redisStorageProvider, dayjsDateProvider)
 
     return logoutUseCase
 }
