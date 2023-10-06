@@ -1,5 +1,6 @@
 import { env } from "@/env";
-import { RedisInMemoryProvider } from "@/providers/StorageInMemoryProvider/implementations/provider-redis-in-memory";
+import { RedisInMemoryProvider } from "@/providers/CacheProvider/implementations/provider-redis-in-memory";
+import { InvalidAccessTokenError } from "@/usecases/errors/invalid-access-token-error";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { verify } from "jsonwebtoken";
 
@@ -31,7 +32,7 @@ export async function verifyTokenJWT(
         const inBlackList = await storageInMemoryProvider.isTokenInBlackList(token)
 
         if(inBlackList){
-            throw new Error('Invalid token')
+            throw new InvalidAccessTokenError()
         }
         // depois pesquisar em um método findbyid que vamos criar
         // adicionar idUser no request
@@ -40,6 +41,6 @@ export async function verifyTokenJWT(
             token,
         };
     } catch {
-        throw new Error("Invalid token");
+        throw new InvalidAccessTokenError();
     }
 }

@@ -1,5 +1,5 @@
+import { RedisInMemoryProvider } from "@/providers/CacheProvider/implementations/provider-redis-in-memory";
 import { DayjsDateProvider } from "@/providers/DateProvider/implementations/provider-dayjs";
-import { RedisInMemoryProvider } from "@/providers/StorageInMemoryProvider/implementations/provider-redis-in-memory";
 import { PrismaTokensRepository } from "@/repositories/prisma/prisma-tokens-repository";
 import { LogoutUseCase } from "@/usecases/users/logout/logout-usecase";
 

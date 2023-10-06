@@ -12,50 +12,53 @@ describe('Logout User (e2e)', ()=>{
     })
 
     test('should be able to logout a user', async()=>{
-        await request(fastifyApp.server).post('/api/users').send({
+        const responseRegisterUser = await request(fastifyApp.server).post('/api/users').send({
+            email: 'email1@test.com',
             name: 'Kaio Moreira',
-            email: 'user1-dev@outlook.com',
             password: '123456',
         })
 
         const responseLogin = await request(fastifyApp.server)
         .post('/api/users/login')
         .send({
-            email: 'user1-dev@outlook.com',
+            email: 'email1@test.com',
             password: '123456',
         })
-
-        expect(responseLogin.statusCode).toEqual(200)
-
+        const {accessToken, refreshToken, user} = responseLogin.body
         const responseLogout = await request(fastifyApp.server)
         .post('/api/users/logout')
-        .set('Authorization', `Bearer ${responseLogin.body.accessToken}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .send({
-            refreshToken: responseLogin.body.refreshToken,
+            refreshToken,
         })
+        console.log(responseLogout.body)
 
-        expect(responseLogout.statusCode).toEqual(200)
+        const responseFindUser = await request(fastifyApp.server)
+        .get(`/api/users/${user.id}`)
+        .set('Authorization', `Bearer ${accessToken}`)
+        .send()
+
+        expect(responseFindUser.statusCode).toEqual(401)
     })
 
     test('should not be able to logout a user invalid', async()=>{
-        await request(fastifyApp.server).post('/api/users').send({
+        const responseRegisterUser = await request(fastifyApp.server).post('/api/users').send({
+            email: 'email1@test.com',
             name: 'Kaio Moreira',
-            email: 'user1-dev@outlook.com',
             password: '123456',
         })
 
         const responseLogin = await request(fastifyApp.server)
         .post('/api/users/login')
         .send({
-            email: 'user1-dev@outlook.com',
+            email: 'email1@test.com',
             password: '123456',
         })
-
-        expect(responseLogin.statusCode).toEqual(200)
+        const {accessToken, refreshToken, user} = responseLogin.body
 
         const responseLogout = await request(fastifyApp.server)
         .post('/api/users/logout')
-        .set('Authorization', `Bearer ${responseLogin.body.accessToken}`)
+        .set('Authorization', `Bearer ${accessToken}`)
         .send({
             refreshToken: 'fake-refresh-token',
         })

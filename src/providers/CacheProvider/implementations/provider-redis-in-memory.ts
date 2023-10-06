@@ -1,7 +1,7 @@
 import { redisClient } from "@/config/redis-connection";
-import { IStorageInMemoryProvider } from "../interface-storage-in-memory";
+import { ICacheProvider} from "../interface-cache";
 
-export class RedisInMemoryProvider implements IStorageInMemoryProvider {
+export class RedisInMemoryProvider implements ICacheProvider {
     async resetDatesToDeleteBlackList(): Promise<void> {
         await redisClient.del('DATE_DELETE_BLACKLIST')
     }
@@ -35,9 +35,5 @@ export class RedisInMemoryProvider implements IStorageInMemoryProvider {
     
     async clearBlackList() {
         await redisClient.del('BLACKLIST')
-
-        const tokens = await redisClient.sMembers('BLACKLIST')
-
-        return tokens
     }
 }
