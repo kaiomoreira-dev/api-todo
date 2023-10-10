@@ -5,10 +5,6 @@ interface IRequestListTodo{
     idUser: string
 }
 
-interface IResponseListTodo{
-    todos: Todo[]
-}
-
 export class ListTodoByUserUseCase{
     constructor(
         private todosRepository: ITodosRepository
@@ -16,11 +12,9 @@ export class ListTodoByUserUseCase{
     
     async execute({
         idUser,
-    }:IRequestListTodo): Promise<IResponseListTodo>{
+    }:IRequestListTodo): Promise<Todo[]>{
        const todos = await this.todosRepository.list(idUser)
 
-       return {
-        todos
-       }        
+       return todos 
     }
 }
