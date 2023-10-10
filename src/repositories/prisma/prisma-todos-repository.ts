@@ -13,6 +13,9 @@ export class PrismaTodosRepository implements ITodosRepository{
         return await prisma.todo.findMany({
             where: {
                 idUser
+            },
+            orderBy:{
+                createdAt: 'asc'
             }
         })
     }

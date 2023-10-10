@@ -52,9 +52,6 @@ export class PrismaUsersRepository implements IUsersRepository{
                 emailActive: true,
                 createdAt: true,
                 todos: true
-            },
-            orderBy:{
-                createdAt: 'asc'
             }
         }) as unknown as User[]
         return users
