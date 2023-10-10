@@ -9,18 +9,22 @@ import { FindUser } from './find/find-user-controller'
 import { DeleteUser } from './delete/delete-user-controller'
 import { UpdateUser } from './update-full/update-user-controller'
 import { verifyTokenJWT } from '@/http/middlewares/verify-token-jwt'
+import { RefreshToken } from './refresh-token/refresh-token-users-controller'
 export async function usersRoutes(fastifyApp: FastifyInstance) {
-    // register user
-    fastifyApp.post('/', RegisterUser)
-
     // login user
     fastifyApp.post('/login', LoginUser)
+
+    // refresh token
+    fastifyApp.post('/refresh-token', RefreshToken)
 
     // logout user
     fastifyApp.post('/logout', {onRequest: [verifyTokenJWT]}, LogoutUser)
 
     // verify e-mail user
     fastifyApp.patch('/verify-email', VerifyEmail)
+
+    // register user
+    fastifyApp.post('/', RegisterUser)
 
     // send forgot password user
     fastifyApp.post('/forgot-password', SendForgotPassword)
