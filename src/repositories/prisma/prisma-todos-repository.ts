@@ -15,7 +15,7 @@ export class PrismaTodosRepository implements ITodosRepository{
                 idUser
             },
             orderBy:{
-                createdAt: 'asc'
+                createdAt: 'desc'
             }
         })
     }
