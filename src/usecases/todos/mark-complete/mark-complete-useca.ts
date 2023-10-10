@@ -21,6 +21,7 @@ export class MarktTodoCompletedUseCase{
 
         if(todo.completed){
             await this.todosRepository.markCompletedTrue(id, false)
+            return
         }
       
         // atualizar todo para completed true
