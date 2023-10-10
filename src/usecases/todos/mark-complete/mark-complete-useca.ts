@@ -18,8 +18,12 @@ export class MarktTodoCompletedUseCase{
         if(!todo){
             throw new ResourceNotFoundError()
         }
+
+        if(todo.completed){
+            await this.todosRepository.markCompletedTrue(id, false)
+        }
       
         // atualizar todo para completed true
-        await this.todosRepository.markCompletedTrue(id)
+        await this.todosRepository.markCompletedTrue(id, true)
     }
 }

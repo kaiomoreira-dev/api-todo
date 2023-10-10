@@ -6,6 +6,6 @@ export interface ITodosRepository {
     findById(id: string): Promise<Todo| null>
     countAllByUserId(idUser:string): Promise<number>
     countAllReadyByUserId(idUser:string): Promise<number>
-    markCompletedTrue(id: string): Promise<Todo>
+    markCompletedTrue(id: string, toggle: boolean): Promise<Todo>
     delete(id: string): Promise<void>
 }

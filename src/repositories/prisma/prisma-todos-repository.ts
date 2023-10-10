@@ -42,13 +42,13 @@ export class PrismaTodosRepository implements ITodosRepository{
         return count
     }
 
-    async markCompletedTrue(id: string){
+    async markCompletedTrue(id: string, toggle: boolean){
         const todo = await prisma.todo.update({
             where: {
                 id
             },
             data:{
-                completed: true
+                completed: toggle
             }
         })
 
