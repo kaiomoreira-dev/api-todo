@@ -50,7 +50,7 @@ export class RefreshTokenUseCase{
 
         // criar novo access token
         const newAccessToken = sign({}, env.JWT_SECRET_ACCESS_TOKEN, {
-            subject: 'idUser',
+            subject: userToken.idUser,
             expiresIn: env.JWT_EXPIRES_IN_ACCESS_TOKEN
         })
         
