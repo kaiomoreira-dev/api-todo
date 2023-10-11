@@ -57,7 +57,7 @@ export class LoginUseCase{
         const daysNumber = env.JWT_EXPIRES_IN_REFRESH_TOKEN[0]
 
         // criar data de expiração do refresh token
-        const expireDateRefreshToken = this.dayjsDateProvider.addDays(Number(daysNumber))
+        const expireDateRefreshToken = this.dayjsDateProvider.addHours(Number(daysNumber))
 
         // Salvar refresh token no banco
         await this.usersTokensRepository.create({
