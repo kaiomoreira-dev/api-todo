@@ -4,8 +4,9 @@ import { InvalidAccessTokenError } from "@/usecases/errors/invalid-access-token-
 import { FastifyReply, FastifyRequest } from "fastify";
 import { verify } from "jsonwebtoken";
 
-interface IPayload {
+export interface IPayload {
     sub: string;
+    email?: string;
 }
 
 export async function verifyTokenJWT(
@@ -25,7 +26,6 @@ export async function verifyTokenJWT(
     // retirar de dentro do verify o id do user que esta no token
     try {
         const { sub: idUser } = verify(token, env.JWT_SECRET_ACCESS_TOKEN) as IPayload;
-
         //[] verificar se o token existe na blacklist
         const storageInMemoryProvider = new RedisInMemoryProvider()
 

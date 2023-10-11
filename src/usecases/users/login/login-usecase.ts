@@ -7,7 +7,6 @@ import { User } from "@prisma/client";
 import { compare } from "bcrypt";
 import 'dotenv/config'
 import jwt from 'jsonwebtoken'
-import { IPayload } from "../refresh-token/refresh-token-usecase";
 
 interface IRequestLoginAccount {
     email: string,
@@ -50,13 +49,15 @@ export class LoginUseCase{
         }) 
        
         // Criar refresh token
-        const refreshToken = jwt.sign({subject:findUserExists.id, email}, env.JWT_SECRET_REFRESH_TOKEN, {
+        const refreshToken = jwt.sign({email}, env.JWT_SECRET_REFRESH_TOKEN, {
             subject: findUserExists.id,
             expiresIn: env.JWT_EXPIRES_IN_REFRESH_TOKEN
         })
 
+        const daysNumber = env.JWT_EXPIRES_IN_REFRESH_TOKEN[0]
+
         // criar data de expiração do refresh token
-        const expireDateRefreshToken = this.dayjsDateProvider.addDays(10)
+        const expireDateRefreshToken = this.dayjsDateProvider.addDays(Number(daysNumber))
 
         // Salvar refresh token no banco
         await this.usersTokensRepository.create({
