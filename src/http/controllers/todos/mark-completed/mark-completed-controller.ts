@@ -8,15 +8,21 @@ import { z } from 'zod'
 export async function MarkCompleted (request: FastifyRequest, reply:FastifyReply){
         try {
           const todoSchemaParams = z.object({
-            id: z.string().uuid().nonempty()
+            id: z.string().uuid().nonempty(),
           })
+          const todoSchemaBody = z.object({
+            value: z.boolean()
+          })
+          
+          const { value } = todoSchemaBody.parse(request.body)
 
           const { id } = todoSchemaParams.parse(request.params)
 
             const markTodoCompleteUseCase = await makeMarkCompleteTodo()
             
             await markTodoCompleteUseCase.execute({
-                id
+                id,
+                value
             })
             return reply.status(200).send({message: "Todo marked as completed"})
             
