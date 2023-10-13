@@ -3,7 +3,6 @@ import { ResourceNotFoundError } from "@/usecases/errors/resource-not-found-erro
 
 interface IRequestCountTodo{
     id: string
-    value: boolean
 }
 
 export class MarktTodoCompletedUseCase{
@@ -13,7 +12,6 @@ export class MarktTodoCompletedUseCase{
     
     async execute({
         id,
-        value
     }:IRequestCountTodo): Promise<void>{
         const todo = await this.todosRepository.findById(id)
 
@@ -21,12 +19,12 @@ export class MarktTodoCompletedUseCase{
             throw new ResourceNotFoundError()
         }
 
-        if(value){
-            await this.todosRepository.markCompletedTrue(id, value)
+        if(todo.completed){
+            await this.todosRepository.markCompletedTrue(id, false)
             return
         }
       
         // atualizar todo para completed true
-        await this.todosRepository.markCompletedTrue(id, value)
+        await this.todosRepository.markCompletedTrue(id, true)
     }
 }
