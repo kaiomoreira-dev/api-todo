@@ -33,18 +33,6 @@ export class VerifyEmailUseCase{
             throw new ResourceNotFoundError()
         }
 
-        // verificar se o token está expirado
-        if  (
-                this.dayjsDateProvider.compareIfBefore
-                (
-                    findToken.expireDate, 
-                    this.dayjsDateProvider.dateNow()
-                )
-            )
-            {
-                throw new AccessTimeOutError()
-            }
-
         //atualizar emailActive para true
         await this.usersRepository.activeEmail(findUserByEmail.id)
     }

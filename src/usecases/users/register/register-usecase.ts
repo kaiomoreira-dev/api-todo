@@ -53,13 +53,10 @@ export class RegisterUseCase{
         // gerar token valido por 3h
         const token = randomUUID()
         console.log(token)
-        // gerar data em horas
-        const expireDateHours = this.dayjsDateProvider.addHours(3)
 
         // salvar token no banco
        await this.usersTokensRepository.create({
             idUser: user.id,
-            expireDate: expireDateHours,
             token
         })
         // formatar link com token

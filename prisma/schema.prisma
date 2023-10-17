@@ -25,10 +25,10 @@ model User {
 }
 
 model Token {
-  id         String   @id @unique @default(uuid())
-  token      String   @unique
-  expireDate DateTime
-  createdAt  DateTime @default(now())
+  id         String    @id @unique @default(uuid())
+  token      String    @unique
+  expireDate DateTime?
+  createdAt  DateTime  @default(now())
 
   user   User   @relation(fields: [idUser], references: [id], onDelete: Cascade, onUpdate: Cascade)
   idUser String

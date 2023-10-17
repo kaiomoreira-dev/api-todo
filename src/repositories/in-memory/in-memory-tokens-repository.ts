@@ -26,7 +26,7 @@ export class InMemoryTokensRepository implements ITokensRepository {
         const userToken = {
             id: randomUUID(),
             idUser,
-            expireDate: new Date(expireDate),
+            expireDate: expireDate ? new Date(expireDate) : null,
             token,
             createdAt: new Date()
         }
