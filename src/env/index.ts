@@ -11,8 +11,9 @@ const envSchema = z.object({
     JWT_EXPIRES_IN_REFRESH_TOKEN: z.string().nonempty(),
     JWT_EXPIRES_IN_ACCESS_TOKEN: z.string().nonempty(),
     SENDGRID_API_KEY: z.string().nonempty(),
-    APP_URL_DEVLOPMENT: z.string().optional(),
-    APP_URL_PRODUCTION: z.string().optional(),
+    API_URL_DEVLOPMENT: z.string().optional(),
+    API_URL_PRODUCTION: z.string().optional(),
+    APP_URL: z.string().nonempty(),
     REDIS_URL: z.string().nonempty(),
 })
 
