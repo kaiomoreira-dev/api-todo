@@ -17,7 +17,7 @@ export class EmailVerifyUserUseCase{
         const findUserExist = await this.usersRepository.findByEmail(email)
 
         // validar se usuario existe
-        if(findUserExist){
+        if(findUserExist?.emailActive === true){
             return true
         }
 
