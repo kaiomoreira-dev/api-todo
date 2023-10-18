@@ -10,12 +10,16 @@ import { DeleteUser } from './delete/delete-user-controller'
 import { UpdateUser } from './update-full/update-user-controller'
 import { verifyTokenJWT } from '@/http/middlewares/verify-token-jwt'
 import { RefreshToken } from './refresh-token/refresh-token-users-controller'
+import { EmailExists } from './email-exists/email-exists-controller'
 export async function usersRoutes(fastifyApp: FastifyInstance) {
     // login user
     fastifyApp.post('/login', LoginUser)
 
     // refresh token
     fastifyApp.post('/refresh-token', RefreshToken)
+
+    // email exists user
+    fastifyApp.get('/email-exists', EmailExists)
 
     // logout user
     fastifyApp.post('/logout', {onRequest: [verifyTokenJWT]}, LogoutUser)
