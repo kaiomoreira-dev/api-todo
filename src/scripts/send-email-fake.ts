@@ -3,7 +3,7 @@ import { EtherealProvider } from "@/providers/MailProvider/implementations/provi
 async function run() {
 const ehtreal = await EtherealProvider.createTransporter();
 
-    const pathTemplate = './views/emails/verify-email.hbs'
+    const pathTemplate = './views/emails/forgot-password.hbs'
     await ehtreal.sendEmail(
         'email@email.test', 
         'Kaio Moreira', 
