@@ -36,7 +36,7 @@ export class ResetPasswordUseCase{
         if  (
                 this.dayjsDateProvider.compareIfBefore
                 (
-                    findToken.expireDate, 
+                    findToken.expireDate as Date, 
                     this.dayjsDateProvider.dateNow()
                 )
             )
