@@ -14,7 +14,7 @@ const envSchema = z.object({
     API_URL_DEVLOPMENT: z.string().optional(),
     API_URL_PRODUCTION: z.string().optional(),
     APP_URL: z.string().nonempty(),
-    REDIS_URL: z.string().nonempty(),
+    REDIS_PRIVATE_URL: z.string().nonempty(),
 })
 
 const _env = envSchema.safeParse(process.env)

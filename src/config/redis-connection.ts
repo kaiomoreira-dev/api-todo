@@ -4,7 +4,7 @@ import { createClient } from "redis";
 
 export const redisClient = env.NODE_ENV === "development" ?
     createClient() :
-    createClient({url: env.REDIS_URL})
+    createClient({url: env.REDIS_PRIVATE_URL})
 
 redisClient.connect()
 .then(()=>{
